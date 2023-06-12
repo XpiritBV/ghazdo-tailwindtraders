@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  resource-group: "github-workshops"
+  resource-group: "ghazdo-workshops"
   BuildConfiguration: "Release"
   BuildPlatform: "any cpu"
   Parameters.RestoreBuildProjects: "**/*.csproj"
@@ -27,10 +27,6 @@ stages:
 
     - task: AdvancedSecurity-Dependency-Scanning@1
     
-    - task: AdvancedSecurity-Codeql-Init@1
-      inputs:
-        languages: 'csharp, javascript'
-
     - task: Npm@1
       displayName: 'npm install'
       inputs:
@@ -49,8 +45,6 @@ stages:
         projects: '$(Parameters.RestoreBuildProjects)'
         arguments: '--configuration $(BuildConfiguration)'
 
-    - task: AdvancedSecurity-Codeql-Analyze@1
-      
     - task: AdvancedSecurity-Publish@1
     
     - task: DotNetCoreCLI@2
