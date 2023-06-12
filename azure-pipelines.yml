@@ -29,7 +29,6 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: AdvancedSecurity-Dependency-Scanning@1
-- task: AdvancedSecurity-Publish@1
 
 - task: AdvancedSecurity-Codeql-Init@1
   inputs:
