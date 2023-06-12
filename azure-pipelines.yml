@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  resource-group: "github-workshops"
+  resource-group: "ghazdo-workshops"
   BuildConfiguration: "Release"
   BuildPlatform: "any cpu"
   Parameters.RestoreBuildProjects: "**/*.csproj"
@@ -14,11 +14,11 @@ pool:
   vmImage: windows-latest
 
 stages:
-- stage: 'Build'
-  displayName: 'Build'
+- stage: 'AdvancedSecurityScan'
+  displayName: 'Advanced Security Scan'
   jobs:
   - job: 
-    displayName: 'Build on Windows'
+    displayName: 'Advanced Security'
     steps:
     - task: NodeTool@0
       displayName: 'Use Node 10.16.3'
