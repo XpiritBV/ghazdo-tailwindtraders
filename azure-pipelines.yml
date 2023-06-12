@@ -28,6 +28,21 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: AdvancedSecurity-Dependency-Scanning@1
+- task: AdvancedSecurity-Publish@1
+
+- task: AdvancedSecurity-Codeql-Init@1
+  inputs:
+    languages: 'csharp'
+
+- task: AdvancedSecurity-Codeql-Autobuild@1
+
+- task: AdvancedSecurity-Codeql-Analyze@1
+  inputs:
+    querysuite: 'default'
+
+- task: AdvancedSecurity-Publish@1
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
