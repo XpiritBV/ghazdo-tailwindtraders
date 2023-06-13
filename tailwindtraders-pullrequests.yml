@@ -14,5 +14,6 @@ pool:
 steps:
   - script: echo This pipeline runs for all pull requests
 
-    - task: AdvancedSecurity-Dependency-Scanning@1
-    
+  - task: AdvancedSecurity-Dependency-Scanning@1
+
+  - task: AdvancedSecurity-Publish@1
