@@ -9,7 +9,7 @@ pr:
       - "*"
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: windows-latest
 
 steps:
   - script: echo This pipeline runs for all pull requests
