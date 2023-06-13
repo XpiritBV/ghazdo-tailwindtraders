@@ -1,0 +1,15 @@
+trigger:
+  branches:
+    exclude:
+      - "*"
+
+pr:
+  branches:
+    include:
+      - "*"
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: echo This pipeline runs for all pull requests
