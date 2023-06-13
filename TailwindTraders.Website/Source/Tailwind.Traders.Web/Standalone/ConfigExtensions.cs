@@ -30,8 +30,14 @@ namespace Tailwind.Traders.Web.Standalone
                 _ => new SqlConnection(config["SqlConnectionString"]));
 
             var telemetryClient = new TelemetryClient();
-            var mongoConnectionString = config["MongoConnectionString"] ?? "mongodb://localhost:27017";
+            //var mongoConnectionString = config["MongoConnectionString"] ?? "mongodb://localhost:27017";
+            
+            // Todo: For local testing only. DO NOT check into repo.
+            var mongoConnectionString = "";
+
+            // Get the connection string from app settings and use it to create a connection.
             var mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+
             mongoClientSettings.ClusterConfigurator = cc =>
             {
                 cc.Subscribe<CommandSucceededEvent>(e =>
