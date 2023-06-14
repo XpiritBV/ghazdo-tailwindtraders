@@ -2,6 +2,8 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tailwind.Traders.Web.Standalone.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Tailwind.Traders.Web.Standalone.Controllers
 {
