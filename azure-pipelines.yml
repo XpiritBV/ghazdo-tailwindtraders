@@ -15,10 +15,10 @@ pool:
 
 stages:
 - stage: 'AdvancedSecurityScan'
-  displayName: 'Advanced Security Scan'
+  displayName: 'Advanced Security'
   jobs:
   - job: 
-    displayName: 'Advanced Security'
+    displayName: 'Advanced Security Scanning'
     steps:
     # - task: NodeTool@0
     #   displayName: 'Use Node 10.16.3'
