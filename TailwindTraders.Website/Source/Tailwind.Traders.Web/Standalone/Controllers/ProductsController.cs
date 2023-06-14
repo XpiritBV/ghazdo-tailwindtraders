@@ -51,9 +51,12 @@ namespace Tailwind.Traders.Web.Standalone.Controllers
 
         [HttpGet()]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetCategory([FromQuery] string[] connectionString = null, [FromQuery] string[] category = null)
+        public async Task<IActionResult> GetCategory([FromQuery] int[] brand = null, [FromQuery] string[] type = null, [FromQuery] string[] connectionString = null, [FromQuery] string[] category = null)
         {
             var query1 = "select item, price from product where item_category = '" + category + "' Order by Price";
+            var products = await productService.GetProducts(brand, type);
+            var types = await productService.GetTypes();
+            var brands = await productService.GetBrands();
 
             // Todo: Updated code to return ProductList for single Category
             return Ok(new ProductList
