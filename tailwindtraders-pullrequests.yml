@@ -8,21 +8,37 @@ pr:
     include:
       - "*"
 
+variables:
+  resource-group: "ghazdo-workshops"
+  BuildConfiguration: "Release"
+  BuildPlatform: "any cpu"
+  Parameters.RestoreBuildProjects: "**/*.csproj"
+  Parameters.TestProjects: "**/*[Tt]ests/*.csproj"
+  webapp_name: tailwind-github-demo
+  advancedsecurity.submittoadvancedsecurity: true
+
 pool:
   vmImage: windows-latest
 
-steps:
-  - script: echo This pipeline runs for all pull requests
-
-  - task: AdvancedSecurity-Dependency-Scanning@1
-
-  - task: AdvancedSecurity-Codeql-Init@1
-    inputs:
-      languages: 'csharp, javascript'
-
-  - task: AdvancedSecurity-Codeql-Autobuild@1
-  
-  - task: AdvancedSecurity-Codeql-Analyze@1
+stages:
+- stage: 'AdvancedSecurityScan'
+  displayName: 'Advanced Security Scan'
+  jobs:
+  - job: 
+    displayName: 'Advanced Security'
+    steps:
+    # - task: NodeTool@0
+    #   displayName: 'Use Node 10.16.3'
+    #   inputs:
+    #     versionSpec: 10.16.3
     
-  - task: AdvancedSecurity-Publish@1
-  
+    - task: AdvancedSecurity-Codeql-Init@1
+      inputs:
+        languages: 'csharp, javascript'
+
+    - task: AdvancedSecurity-Codeql-Autobuild@1
+    
+    - task: AdvancedSecurity-Codeql-Analyze@1
+      
+    - task: AdvancedSecurity-Publish@1
+    
