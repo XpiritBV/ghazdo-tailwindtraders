@@ -21,17 +21,38 @@ pool:
   vmImage: windows-latest
 
 stages:
-- stage: 'AdvancedSecurityScan'
-  displayName: 'Advanced Security'
+- stage: 'Build'
+  displayName: 'Build'
   jobs:
   - job: 
-    displayName: 'Advanced Security Scanning'
+    displayName: 'Build on Windows'
     steps:
-    # - task: NodeTool@0
-    #   displayName: 'Use Node 10.16.3'
-    #   inputs:
-    #     versionSpec: 10.16.3
+    - task: NodeTool@0
+      displayName: 'Use Node 10.16.3'
+      inputs:
+        versionSpec: 10.16.3
+
+    - task: AdvancedSecurity-Dependency-Scanning@1
+      displayName: 'Dependency Scanning'
     
+    - task: Npm@1
+      displayName: 'npm install'
+      inputs:
+        workingDir: TailwindTraders.Website/Source/Tailwind.Traders.Web/ClientApp
+        verbose: false
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: '$(Parameters.RestoreBuildProjects)'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        projects: '$(Parameters.RestoreBuildProjects)'
+        arguments: '--configuration $(BuildConfiguration)'
+
     - task: AdvancedSecurity-Codeql-Init@1
       inputs:
         languages: 'csharp, javascript'
@@ -39,6 +60,13 @@ stages:
     - task: AdvancedSecurity-Codeql-Autobuild@1
     
     - task: AdvancedSecurity-Codeql-Analyze@1
-      
+
     - task: AdvancedSecurity-Publish@1
+      displayName: 'Dependency Publish'
     
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: '$(Parameters.TestProjects)'
+        arguments: '--configuration $(BuildConfiguration)'
