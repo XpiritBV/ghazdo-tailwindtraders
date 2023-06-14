@@ -26,6 +26,7 @@ stages:
         versionSpec: 10.16.3
 
     - task: AdvancedSecurity-Dependency-Scanning@1
+      displayName: 'Dependency Scanning'
     
     - task: Npm@1
       displayName: 'npm install'
@@ -46,6 +47,7 @@ stages:
         arguments: '--configuration $(BuildConfiguration)'
 
     - task: AdvancedSecurity-Publish@1
+      displayName: 'Dependency Publish'
     
     - task: DotNetCoreCLI@2
       displayName: Test
