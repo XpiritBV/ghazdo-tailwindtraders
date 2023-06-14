@@ -12,7 +12,7 @@ namespace Tailwind.Traders.Web.Standalone.Services
     {
         private readonly SqlConnection sqlConnection;
         private readonly string productImagesUrl;
-        private readonly int myId;
+        private int myId;
 
         public ProductService(SqlConnection sqlConnection, IOptions<Settings> settings)
         {
