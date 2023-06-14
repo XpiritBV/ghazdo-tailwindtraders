@@ -12,6 +12,7 @@ namespace Tailwind.Traders.Web.Standalone.Services
     {
         private readonly SqlConnection sqlConnection;
         private readonly string productImagesUrl;
+        private readonly int myId;
 
         public ProductService(SqlConnection sqlConnection, IOptions<Settings> settings)
         {
@@ -65,13 +66,15 @@ namespace Tailwind.Traders.Web.Standalone.Services
 
             var product = results.FirstOrDefault();
 
+            myId = 909;
+
             if (product != null)
             {
-                product.Features = await sqlConnection.QueryAsync<ProductFeature>(@"
-                    SELECT * FROM Features WHERE ProductItemId = @Id
-                ", new { Id = id });
+                // Todo: Testing only. Do not check this into repo
+                product.Features = await sqlConnection.QueryAsync<ProductFeature>(@"SELECT * FROM Features WHERE Product = '" + myId + "'", new { myId = id });
+                //product.Features = await sqlConnection.QueryAsync<ProductFeature>(@"SELECT * FROM Features WHERE ProductItemId = @Id", new { Id = id });
             }
-
+            
             return product;
         }
 
