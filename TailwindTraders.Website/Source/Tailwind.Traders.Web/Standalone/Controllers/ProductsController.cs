@@ -46,5 +46,19 @@ namespace Tailwind.Traders.Web.Standalone.Controllers
         {
             return Ok(new object[] {});
         }
+
+        [HttpGet("category")]
+        public IActionResult GetProductCategory([FromQuery] string[] connectionString = null, [FromQuery] string[] category = null)
+        {
+        using (var connection = new sqlConnection(connectionString))
+            {
+            var query1 = "select item, price from product where item_category = '" + category + "' Order by Price";
+            var adapter = new SqlDataAdaptor(query1, connection);
+            var result = new DataSet();
+            adapter.Fill(result);
+            return result;
+            }
+        }
+
     }
 }
