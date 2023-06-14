@@ -33,10 +33,9 @@ namespace Tailwind.Traders.Web.Standalone
             //var mongoConnectionString = config["MongoConnectionString"] ?? "mongodb://localhost:27017";
             
             // Todo: For local testing only. DO NOT check into repo.
-            var mongoConnectionString = "";
-
+            var mongoConnectionString = "ongodb://myservernamehere:SKiEI5tRk55K4r4dwUCF5viVEWZmJsSJ9lUVHUM1xgVRuoGQqilhCTqquOPSPyaw7x7DUAen5f4eACDbs9d9Vg==@myservernamehere.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@myservernamehere@";
             // Get the connection string from app settings and use it to create a connection.
-            var mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+            // var mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
 
             mongoClientSettings.ClusterConfigurator = cc =>
             {
