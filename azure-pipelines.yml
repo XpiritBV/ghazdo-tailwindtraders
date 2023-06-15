@@ -20,18 +20,24 @@ stages:
   - job: 
     displayName: 'Advanced Security Scanning'
     steps:
-    # - task: NodeTool@0
-    #   displayName: 'Use Node 10.16.3'
-    #   inputs:
-    #     versionSpec: 10.16.3
     
+    # Setup Node.js environment
+    - task: NodeTool@0
+      displayName: 'Use Node 10.16.3'
+      inputs:
+        versionSpec: 10.16.3
+    
+    # Initializes the CodeQL tools for scanning.
     - task: AdvancedSecurity-Codeql-Init@1
       inputs:
         languages: 'csharp, javascript'
 
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     - task: AdvancedSecurity-Codeql-Autobuild@1
     
+    # Performs CodeQL Analysis
     - task: AdvancedSecurity-Codeql-Analyze@1
       
+    # Publish Results to Advance Security Dashboard
     - task: AdvancedSecurity-Publish@1
     
