@@ -31,6 +31,10 @@ namespace Tailwind.Traders.Web.Standalone.Controllers
 
             return Ok(new
             {
+                // Check to login to SQL
+                AuthenticateUser(request.username)
+
+                
                 access_token = CreateAccessToken(request.Username),
                 refresh_token = ""
             });
