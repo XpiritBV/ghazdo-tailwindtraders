@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Options;
 using Tailwind.Traders.Web.Standalone.Models;
-using System.Web.UI.Webcontrols;
 
 namespace Tailwind.Traders.Web.Standalone.Services
 {
@@ -13,8 +12,6 @@ namespace Tailwind.Traders.Web.Standalone.Services
     {
         private readonly SqlConnection sqlConnection;
         private readonly string productImagesUrl;
-        private int myId;
-        TextBox myIdTextBox;
 
         public ProductService(SqlConnection sqlConnection, IOptions<Settings> settings)
         {
@@ -38,7 +35,7 @@ namespace Tailwind.Traders.Web.Standalone.Services
             return brands;
         }
 
-        public async Task<Product> GetProduct(int id)
+        public async Task<Product> GetProduct(int id, string myCategory)
         {
             await OpenConnection();
             var results = await sqlConnection.QueryAsync<Product, ProductBrand, ProductType, Product>(@"
@@ -68,12 +65,10 @@ namespace Tailwind.Traders.Web.Standalone.Services
 
             var product = results.FirstOrDefault();
 
-            //myId = 909;
-
             if (product != null)
             {
                 // Todo: Testing only. Do not check this into repo
-                product.Features = await sqlConnection.QueryAsync<ProductFeature>("SELECT * FROM Features WHERE Product = '" + myIdTextBox.Text + "'", new { myId = id });
+                product.Features = await sqlConnection.QueryAsync<ProductFeature>("SELECT * FROM Features WHERE Category = '" + myCategory + "'", new { Id = id });
                 //product.Features = await sqlConnection.QueryAsync<ProductFeature>(@"SELECT * FROM Features WHERE ProductItemId = @Id", new { Id = id });
             }
             
