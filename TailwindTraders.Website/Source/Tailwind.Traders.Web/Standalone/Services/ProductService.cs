@@ -35,7 +35,7 @@ namespace Tailwind.Traders.Web.Standalone.Services
             return brands;
         }
 
-        public async Task<Product> GetProduct(int id, string myCategory)
+        public async Task<Product> GetProduct(int id)
         {
             await OpenConnection();
             var results = await sqlConnection.QueryAsync<Product, ProductBrand, ProductType, Product>(@"
@@ -67,9 +67,7 @@ namespace Tailwind.Traders.Web.Standalone.Services
 
             if (product != null)
             {
-                // Todo: Testing only. Do not check this into repo
-                product.Features = await sqlConnection.QueryAsync<ProductFeature>("SELECT * FROM Features WHERE Category = '" + myCategory + "'", new { Id = id });
-                //product.Features = await sqlConnection.QueryAsync<ProductFeature>(@"SELECT * FROM Features WHERE ProductItemId = @Id", new { Id = id });
+                product.Features = await sqlConnection.QueryAsync<ProductFeature>(@"SELECT * FROM Features WHERE ProductItemId = @Id", new { Id = id });
             }
             
             return product;
