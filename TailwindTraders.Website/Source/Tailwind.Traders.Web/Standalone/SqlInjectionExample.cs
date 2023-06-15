@@ -1,43 +1,44 @@
 using System;
 using System.Data.SqlClient;
 
-namespace Tailwind.Traders.Web;
-
-public class SqlInjectionExample
+namespace Tailwind.Traders.Web
 {
-    private readonly string _connectionString;
-
-    public SqlInjectionExample(string connectionString)
+    public class SqlInjectionExample
     {
-        _connectionString = connectionString;
-    }
+        private readonly string _connectionString;
 
-    public bool AuthenticateUser(string username, string password)
-    {
-        string query = "SELECT * FROM Users WHERE Username = '" + username + "' AND Password = '" + password + "'";
-
-        using (SqlConnection connection = new SqlConnection(_connectionString))
+        public SqlInjectionExample(string connectionString)
         {
-            SqlCommand command = new SqlCommand(query, connection);
+            _connectionString = connectionString;
+        }
 
-            try
+        public bool AuthenticateUser(string username, string password)
+        {
+            string query = "SELECT * FROM Users WHERE Username = '" + username + "' AND Password = '" + password + "'";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(query, connection);
 
-                if (reader.HasRows)
+                try
                 {
-                    reader.Close();
-                    return true;
-                }
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
 
-                reader.Close();
-                return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        return true;
+                    }
+
+                    reader.Close();
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                    return false;
+                }
             }
         }
     }
