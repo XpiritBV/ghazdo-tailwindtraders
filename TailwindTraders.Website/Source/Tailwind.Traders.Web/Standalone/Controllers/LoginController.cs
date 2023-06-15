@@ -15,10 +15,18 @@ namespace Tailwind.Traders.Web.Standalone.Controllers
     public class LoginController: Controller
     {
         private readonly IConfiguration config;
+        private SqlInjectionExample sqlInjectionExample;
+
 
         public LoginController(IConfiguration config)
         {
             this.config = config;
+            //get connection string from config and put this in the variable sqlinjectionexample
+            sqlInjectionExample = new SqlInjectionExample(config["SqlConnectionString"]);
+
+
+            
+            
         }
 
         [HttpPost()]
@@ -29,12 +37,10 @@ namespace Tailwind.Traders.Web.Standalone.Controllers
                 return BadRequest("Could not verify username and password");
             }
 
+            sqlInjectionExample.AuthenticateUser(request.Username, request.Password);
+
             return Ok(new
             {
-                // Check to login to SQL
-                AuthenticateUser(request.username)
-
-                
                 access_token = CreateAccessToken(request.Username),
                 refresh_token = ""
             });
