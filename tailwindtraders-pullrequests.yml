@@ -1,15 +1,26 @@
+# trigger:
+#   branches:
+#     exclude:
+#       - "*"
+#     include:
+#       - main
+
+# pr:
+#   branches:
+#     include:
+#       - "*"
+
 trigger:
   branches:
-    exclude:
-      - "*"
     include:
       - main
+      - '*'
 
 pr:
   branches:
-    include:
-      - "*"
-
+    exclude:
+      - main
+      
 variables:
   resource-group: "ghazdo-workshops"
   BuildConfiguration: "Release"
