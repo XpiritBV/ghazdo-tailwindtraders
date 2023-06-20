@@ -1,20 +1,4 @@
-# trigger:
-#   branches:
-#     exclude:
-#       - "*"
-#     include:
-#       - main
-
-# pr:
-#   branches:
-#     include:
-#       - "*"
-
-trigger:
-  branches:
-    include:
-      - main
-      - '*'
+trigger: none   
 
 pr:
   branches:
