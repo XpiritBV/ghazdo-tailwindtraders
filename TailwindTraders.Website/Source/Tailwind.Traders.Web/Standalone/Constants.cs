@@ -5,3 +5,4 @@ namespace Tailwind.Traders.Web.Standalone
         public const string DefaultJwtSigningKey = "Ta!lwindTraderssssssss";
     }
 }
+// Test
