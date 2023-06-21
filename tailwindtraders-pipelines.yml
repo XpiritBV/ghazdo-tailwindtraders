@@ -25,8 +25,8 @@ stages:
       inputs:
         versionSpec: 10.16.3
 
-    - task: AdvancedSecurity-Dependency-Scanning@1
-      displayName: 'Dependency Scanning'
+    # - task: AdvancedSecurity-Dependency-Scanning@1
+    #   displayName: 'Dependency Scanning'
     
     - task: Npm@1
       displayName: 'npm install'
@@ -46,6 +46,9 @@ stages:
         projects: '$(Parameters.RestoreBuildProjects)'
         arguments: '--configuration $(BuildConfiguration)'
 
+    - task: AdvancedSecurity-Dependency-Scanning@1
+      displayName: 'Dependency Scanning'
+      
     - task: AdvancedSecurity-Publish@1
       displayName: 'Dependency Publish'
     
