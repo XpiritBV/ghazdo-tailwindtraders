@@ -1,5 +1,5 @@
 # Tailwind Traders Website 
-Update
+
 ![Tailwind Traders Website](Documents/Images/Website.png)
 now with branch protection on main!
 
