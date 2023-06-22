@@ -40,21 +40,17 @@ stages:
         command: restore
         projects: '$(Parameters.RestoreBuildProjects)'
 
-    - task: replacetokens@5
+# qetza.replacetokens.replacetokens-task.replacetokens
+    - task: qetza.replacetokens.replacetokens-task.replacetokens
+      displayName: 'Replace tokens in files'
       inputs:
         targetFiles: '**/*.dialog'
         encoding: 'auto'
         tokenPattern: 'custom'
         tokenPrefix: '#{'
         tokenSuffix: '}#'
-        writeBOM: true
-        actionOnMissing: 'warn'
+        verbosity: 'detailed'
         keepToken: false
-        actionOnNoFiles: 'continue'
-        enableTransforms: false
-        enableRecursion: false
-        useLegacyPattern: false
-        enableTelemetry: true
 
     - task: DotNetCoreCLI@2
       displayName: Build
