@@ -40,6 +40,22 @@ stages:
         command: restore
         projects: '$(Parameters.RestoreBuildProjects)'
 
+    - task: replacetokens@5
+      inputs:
+        targetFiles: '**/*.dialog'
+        encoding: 'auto'
+        tokenPattern: 'custom'
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        actionOnNoFiles: 'continue'
+        enableTransforms: false
+        enableRecursion: false
+        useLegacyPattern: false
+        enableTelemetry: true
+
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
