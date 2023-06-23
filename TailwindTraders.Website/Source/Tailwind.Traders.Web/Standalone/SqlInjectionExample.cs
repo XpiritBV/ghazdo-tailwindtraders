@@ -14,11 +14,13 @@ namespace Tailwind.Traders.Web
 
         public bool AuthenticateUser(string username, string password)
         {
-            string query = "SELECT * FROM Users WHERE Username = '" + username + "' AND Password = '" + password + "'";
+            string query = "SELECT * FROM Users WHERE Username = @username AND Password = @password";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@password", password);
 
                 try
                 {
