@@ -48,13 +48,6 @@ stages:
         verbosity: 'detailed'
         keepToken: false
 
-    #- task: colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task.ReplaceTokens@1
-    #  displayName: 'Replace tokens in files'
-    #  inputs:
-    #    sourcePath: MyPath  # Root path to find files in.
-    #    filePattern: '**\*.dialog'
-    #    tokenRegex: '#{__}#'
-
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
