@@ -24,10 +24,7 @@ stages:
       displayName: 'Use Node 10.16.3'
       inputs:
         versionSpec: 10.16.3
-
-    # - task: AdvancedSecurity-Dependency-Scanning@1
-    #   displayName: 'Dependency Scanning'
-    
+  
     - task: Npm@1
       displayName: 'npm install'
       inputs:
@@ -41,19 +38,15 @@ stages:
         projects: '$(Parameters.RestoreBuildProjects)'
 
     - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+      displayName: 'Replace tokens in files'
       inputs:
-        targetFiles: '**/*.config'
+        targetFiles: '**/*.dialog'
         encoding: 'auto'
-        writeBOM: true
-        actionOnMissing: 'warn'
-        keepToken: false
-        actionOnNoFiles: 'continue'
-        enableTransforms: false
+        tokenPattern: 'custom'
         tokenPrefix: '#{'
         tokenSuffix: '}#'
-        enableRecursion: false
-        useLegacyPattern: false
-        enableTelemetry: true
+        verbosity: 'detailed'
+        keepToken: false
 
     #- task: colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task.ReplaceTokens@1
     #  displayName: 'Replace tokens in files'
