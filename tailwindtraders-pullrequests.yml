@@ -38,17 +38,17 @@ stages:
         workingDir: TailwindTraders.Website/Source/Tailwind.Traders.Web/ClientApp
         verbose: false
 
-    - task: DotNetCoreCLI@2
-      displayName: Restore
-      inputs:
-        command: restore
-        projects: '$(Parameters.RestoreBuildProjects)'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Restore
+    #   inputs:
+    #     command: restore
+    #     projects: '$(Parameters.RestoreBuildProjects)'
 
-    - task: DotNetCoreCLI@2
-      displayName: Build
-      inputs:
-        projects: '$(Parameters.RestoreBuildProjects)'
-        arguments: '--configuration $(BuildConfiguration)'
+    # - task: DotNetCoreCLI@2
+    #   displayName: Build
+    #   inputs:
+    #     projects: '$(Parameters.RestoreBuildProjects)'
+    #     arguments: '--configuration $(BuildConfiguration)'
 
     - task: AdvancedSecurity-Codeql-Init@1
       inputs:
