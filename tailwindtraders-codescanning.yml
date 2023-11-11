@@ -26,3 +26,11 @@ stages:
       displayName: 'Use Node 10.16.3'
       inputs:
         versionSpec: 10.16.3
+
+    # Initializes the CodeQL tools for scanning.
+
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
+    
+    # Performs CodeQL Analysis
+      
+    # Publish Results to Advance Security Dashboard
