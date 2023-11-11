@@ -43,6 +43,10 @@ stages:
         projects: '$(Parameters.RestoreBuildProjects)'
         arguments: '--configuration $(BuildConfiguration)'
 
+    # Performs Dependency Scanning
+      
+    # Publish Results to Advance Security Dashboard
+    
     - task: DotNetCoreCLI@2
       displayName: Test
       inputs:
