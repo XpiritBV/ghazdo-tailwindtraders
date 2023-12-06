@@ -38,14 +38,13 @@ stages:
         workingDir: TailwindTraders.Website/Source/Tailwind.Traders.Web/ClientApp
         verbose: false
 
-    - task: AdvancedSecurity-Codeql-Init@1
-      inputs:
-        languages: 'csharp, javascript'
+    # Initializes the CodeQL tools for scanning.
 
-    - task: AdvancedSecurity-Codeql-Autobuild@1
-    
-    - task: AdvancedSecurity-Codeql-Analyze@1
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
 
+    # Performs CodeQL Analysis
+
+    # Publish Results to Advance Security Dashboard
     - task: AdvancedSecurity-Publish@1
       displayName: 'Dependency Publish'
     
