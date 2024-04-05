@@ -43,7 +43,7 @@ function Get-Repository
      [string] $repoName
     )
 
-    $repoURL = "https://dev.azure.com/$organization/$teamProject/_apis/git/repositories?api-version=7.0"
+    $repoURL = "https://dev.azure.com/$organization/$teamProject/_apis/git/repositories?api-version=7.2"
     $response = Invoke-RestMethod -Uri $repoURL -Headers @{Authorization = $ghazdoAccessToken}   -ContentType "application/json" -Method Get 
     
     foreach($t in $($response.value))
@@ -92,7 +92,7 @@ function Run-AdvancedSecurity {
 
 
     # Call the adv security dependecies
-    $CriticalDependenciesURL = "https://advsec.dev.azure.com/$($organization)/$($teamProject)/_apis/AdvancedSecurity/Repositories/$($repoID)/Alerts?criteria.alertType=1&criteria.branchName=$($branchname)&criteria.onlyDefaultBranchAlerts=true&useDatabaseProvider=true" 
+    $CriticalDependenciesURL = "https://advsec.dev.azure.com/$($organization)/$($teamProject)/_apis/Alert/Repositories/$($repoID)/Alerts?criteria.alertType=1&criteria.branchName=$($branchname)&criteria.onlyDefaultBranchAlerts=true&useDatabaseProvider=true" 
     Write-Host "URL: $CriticalDependenciesURL"
     $response = Invoke-RestMethod -Uri $CriticalDependenciesURL -Headers @{Authorization = $ghazdoAccessToken}   -ContentType "application/json" -Method Get
     Write-Host "Response: $response"
