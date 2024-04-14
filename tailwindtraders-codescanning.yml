@@ -1,6 +1,14 @@
 trigger:
 - main
 
+schedules:
+- cron: "0 0 * * *"
+  displayName: Midnight build
+  branches:
+    include:
+    - main
+  always: true
+
 variables:
   resource-group: "ghazdo-workshops"
   BuildConfiguration: "Release"
